@@ -14,6 +14,8 @@ def lifo(CAT, pList):
     return
 
 def scheduler(sNum, CAT, pList):
+    # 스케쥴러 선택
+    # 1이면 FIFO, 2이면 SJF, 3이면 LIFO, 3만구현
     if sNum==1:
         print("Calling FIFO...")
         # fifo(CAT) # 구현안함
@@ -59,6 +61,12 @@ for i in pList:
     pList[cnt]=int(i)
     cnt=cnt+1
 
+# pList의 각 구성 요소는 [PID, npTime, wTime, pTime]
+# npTime : 각 프로세스별 필요 소모시간
+# wTime : 각 프로세스 waiting time
+# pTime : 각 프로세스 professing time
+for i in range(0, len(pList)):
+    pList[i] =[i, pList[i], 0, 0]
 
 # scheduler calling
 scheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, pList)
