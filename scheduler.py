@@ -72,4 +72,7 @@ for i in range(0, len(pList)):
 scheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, pList)
 
 # file close
-f.close()
+try:
+    f.close()
+except Exception as e:
+    print(str(e))
