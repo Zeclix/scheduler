@@ -47,6 +47,7 @@ try:
     f = open('A.txt', 'r')
 except Exception as e:
     print(str(e))
+    os._exit(1)
 
 # TODO
 # file로부터 pList에 담는다.
@@ -76,3 +77,4 @@ try:
     f.close()
 except Exception as e:
     print(str(e))
+    os._exit(1)
