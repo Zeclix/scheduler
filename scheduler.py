@@ -68,8 +68,9 @@ for i in pList:
 # pTime : 각 프로세스 professing time
 # pList[i] = [PID, npTime, wTime, pTime]
 
+# pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정
 for i in range(0, len(pList)):
-    enqueue(pList, i, pList[i], 0, 0)
+    enqueue(pList, i, pList[i])
 
 
 # scheduler calling
