@@ -1,6 +1,4 @@
-import os
-import sys
-
+import os # for os._exit()
 
 def enqueue(pList, PID, npTime, wTime=0, pTime=0):
     pList.append([PID, npTime, wTime, pTime])
