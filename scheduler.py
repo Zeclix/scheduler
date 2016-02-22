@@ -68,54 +68,55 @@ def scheduler(sNum, CAT, pList):
         os._exit(1)
 
 
-# Input CPU Allocation Time
-while 1:
-    CAT = int(input('Enter CPU Allocation Time : '))
-    if CAT >= 3:
-        break
+if __name__=="__main__":
+    # Input CPU Allocation Time
+    while 1:
+        CAT = int(input('Enter CPU Allocation Time : '))
+        if CAT >= 3:
+            break
 
-# file open
-try:
-    f = open('A.txt', 'r')
-except Exception as e:
-    print(str(e))
-    os._exit(1)
+    # file open
+    try:
+        f = open('A.txt', 'r')
+    except Exception as e:
+        print(str(e))
+        os._exit(1)
 
-# TODO
-# file로부터 List에 담는다.
-# spList : string process list
-spList = f.readline()
+    # TODO
+    # file로부터 List에 담는다.
+    # spList : string process list
+    spList = f.readline()
 
-# string으로 들어온 것을 공백 단위로 쪼개 리스트에 넣는다
-# tpList : temporary process list
-tpList = spList.split()
+    # string으로 들어온 것을 공백 단위로 쪼개 리스트에 넣는다
+    # tpList : temporary process list
+    tpList = spList.split()
 
-# 각 스트링을 int로 변환한다
-cnt = 0
-for i in tpList:
-    tpList[cnt] = int(i)
-    cnt = cnt + 1
+    # 각 스트링을 int로 변환한다
+    cnt = 0
+    for i in tpList:
+        tpList[cnt] = int(i)
+        cnt = cnt + 1
 
-# npTime : 각 프로세스별 필요 소모시간
-# wTime : 각 프로세스 waiting time
-# pTime : 각 프로세스 professing time
-# pList[i] = [PID, npTime, wTime, pTime]
+    # npTime : 각 프로세스별 필요 소모시간
+    # wTime : 각 프로세스 waiting time
+    # pTime : 각 프로세스 professing time
+    # pList[i] = [PID, npTime, wTime, pTime]
 
-# pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정
-pList = []
-for i in range(0, len(tpList)):
-    enqueue(pList, i+1, tpList[i])
+    # pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정
+    pList = []
+    for i in range(0, len(tpList)):
+        enqueue(pList, i+1, tpList[i])
 
 
-# scheduler calling
-pList = scheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, pList)
+    # scheduler calling
+    pList = scheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, pList)
 
-for i in range(len(pList)-1, -1, -1):
-    print("PID : %d\t Waiting Time : %d, Processing Time : %d\n" %(pList[i][0], pList[i][2], pList[i][3]))
+    for i in range(len(pList)-1, -1, -1):
+        print("PID : %d\t Waiting Time : %d, Processing Time : %d\n" %(pList[i][0], pList[i][2], pList[i][3]))
 
-# file close
-try:
-    f.close()
-except Exception as e:
-    print(str(e))
-    os._exit(1)
+    # file close
+    try:
+        f.close()
+    except Exception as e:
+        print(str(e))
+        os._exit(1)
