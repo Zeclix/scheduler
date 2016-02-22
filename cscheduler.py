@@ -55,14 +55,12 @@ class scheduler :
                 process[3]=process[3]+CAT # 현재 처리되고 있는 프로세스의 processing time이 CAT만큼 증가
                 # print(process[3]) # for dbg
 
-
-
         return rList
 
 
 def selectScheduler(sNum, CAT, sche):
-    # 스케쥴러 선택
-    # 1이면 FIFO, 2이면 SJF, 3이면 LIFO, 3만구현
+    ''' 스케쥴러 선택
+     1이면 FIFO, 2이면 SJF, 3이면 LIFO, 3만구현'''
     if sNum == 1:
         print("Calling FIFO...")
         # fifo(CAT) # 구현안함
@@ -93,7 +91,6 @@ if __name__=="__main__":
         print(str(e))
         os._exit(1)
 
-    # TODO
     # file로부터 List에 담는다.
     # spList : string process list
     spList = f.readline()
@@ -103,13 +100,6 @@ if __name__=="__main__":
     tpList = [int(i) for i in spList.split()]
 
     sche = scheduler(tpList)
-
-    # npTime : 각 프로세스별 필요 소모시간
-    # wTime : 각 프로세스 waiting time
-    # pTime : 각 프로세스 professing time
-    # pList[i] = [PID, npTime, wTime, pTime]
-
-
 
     # scheduler calling
     pList = selectScheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, sche)
