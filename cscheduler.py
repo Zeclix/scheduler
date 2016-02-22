@@ -7,7 +7,7 @@ class scheduler :
     def __init__(self, tpList):
         '''pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정'''
         for i in range(0, len(tpList)):
-            scheduler.enqueue(scheduler.pList, i+1, tpList[i])
+            self.enqueue(scheduler.pList, i+1, tpList[i])
 
     def enqueue(self, pList, PID, npTime, wTime=0, pTime=0):
         pList.append([PID, npTime, wTime, pTime])
@@ -32,14 +32,14 @@ class scheduler :
             # print(pList)
             # print("\n")
             if flag==0:
-                process = scheduler.dequeue()
+                process = self.dequeue()
                 flag=1
             if (process[1] <= CAT):
-                for i in range(0, len(scheduler.pList)):
-                    scheduler.pList[i][2]=scheduler.pList[i][2]+process[1]
-                    scheduler.pList[i][3]=scheduler.pList[i][3]+process[1]
+                for i in range(0, len(self.pList)):
+                    self.pList[i][2]=self.pList[i][2]+process[1]
+                    self.pList[i][3]=self.pList[i][3]+process[1]
                 process[3]=process[3]+process[1]
-                scheduler.enqueue(rList, process[0], process[1], process[2], process[3])
+                self.enqueue(rList, process[0], process[1], process[2], process[3])
                 # print("rList:") # for dbg
                 # print(rList)
                 # print(pList)
@@ -49,8 +49,8 @@ class scheduler :
                     break
             else:
                 for i in range(0, len(pList)):
-                    scheduler.pList[i][2]=scheduler.pList[i][2]+CAT # 현재 처리되고 있지 않은 다른 process의 waiting time이 allocation time만큼씩 증가
-                    scheduler.pList[i][3]=scheduler.pList[i][3]+CAT # 다른 process의 processing time이 allocation time만큼씩 증가
+                    self.pList[i][2]=self.pList[i][2]+CAT # 현재 처리되고 있지 않은 다른 process의 waiting time이 allocation time만큼씩 증가
+                    self.pList[i][3]=self.pList[i][3]+CAT # 다른 process의 processing time이 allocation time만큼씩 증가
                 process[1]=process[1]-CAT # 현재 처리되고 있는 프로세스의 남은 처리 요구 시간이 allocation time만큼씩 감소
                 process[3]=process[3]+CAT # 현재 처리되고 있는 프로세스의 processing time이 CAT만큼 증가
                 # print(process[3]) # for dbg
@@ -73,7 +73,7 @@ def selectScheduler(sNum, CAT, sche):
         return
     elif sNum == 3:
         print("Calling LIFO...")
-        return scheduler.lifo(CAT, sche)
+        return sche.lifo(CAT, sche.pList)
     else:
         print("잘못된 접근입니다.")
         os._exit(1)
