@@ -5,11 +5,19 @@ class scheduler :
     pList = []
     rList = [] # result list
     def __init__(self, tpList):
-        '''pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정'''
+        """pList 초기화. PID설정 및 프로세스별 필요 소모시간 설정"""
         for i in range(0, len(tpList)):
             self.enqueue(scheduler.pList, i+1, tpList[i])
 
     def enqueue(self, pList, PID, npTime, wTime=0, pTime=0):
+        """
+        :param pList: pList[i] = [PID, npTime, wTime, pTime]
+        :param PID: Process ID
+        :param npTime: 각 프로세스별 필요 소모시간
+        :param wTime: 각 프로세스 waiting time
+        :param pTime: 각 프로세스 professing time
+        :return: 0
+        """
         pList.append([PID, npTime, wTime, pTime])
         return 0
 
@@ -19,11 +27,6 @@ class scheduler :
 
 
     def lifo(self, CAT, pList):
-        '''npTime : 각 프로세스별 필요 소모시간
-        wTime : 각 프로세스 waiting time
-        pTime : 각 프로세스 professing time
-        pList[i] = [PID, npTime, wTime, pTime] '''
-
         flag =0; # flag가 0일때만 dequeue
         rList=[] # result List
 
@@ -50,8 +53,8 @@ class scheduler :
 
 
 def selectScheduler(sNum, CAT, sche):
-    ''' 스케쥴러 선택
-     1이면 FIFO, 2이면 SJF, 3이면 LIFO, 3만구현'''
+    """ 스케쥴러 선택
+     1이면 FIFO, 2이면 SJF, 3이면 LIFO, 3만구현"""
     if sNum == 1:
         print("Calling FIFO...")
         # fifo(CAT) # 구현안함
