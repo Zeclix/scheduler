@@ -28,9 +28,6 @@ class scheduler :
         rList=[] # result List
 
         while 1:
-            # print("pList:") # for dbg
-            # print(pList)
-            # print("\n")
             if flag==0:
                 process = self.dequeue()
                 flag=1
@@ -40,10 +37,6 @@ class scheduler :
                     self.pList[i][3]=self.pList[i][3]+process[1]
                 process[3]=process[3]+process[1]
                 self.enqueue(rList, process[0], process[1], process[2], process[3])
-                # print("rList:") # for dbg
-                # print(rList)
-                # print(pList)
-                # print("\n")
                 flag=0
                 if len(pList)==0:
                     break
@@ -53,8 +46,6 @@ class scheduler :
                     self.pList[i][3]=self.pList[i][3]+CAT # 다른 process의 processing time이 allocation time만큼씩 증가
                 process[1]=process[1]-CAT # 현재 처리되고 있는 프로세스의 남은 처리 요구 시간이 allocation time만큼씩 감소
                 process[3]=process[3]+CAT # 현재 처리되고 있는 프로세스의 processing time이 CAT만큼 증가
-                # print(process[3]) # for dbg
-
         return rList
 
 
@@ -91,14 +82,9 @@ if __name__=="__main__":
         print(str(e))
         os._exit(1)
 
-    # file로부터 List에 담는다.
-    # spList : string process list
-    spList = f.readline()
-
-    # string으로 들어온 것을 공백 단위로 쪼개 리스트에 넣는다
+    # file로부터 List에 담아, string으로 들어온 것을 공백 단위로 쪼개 int로 변환하여 리스트에 넣는다
     # tpList : temporary process list
-    tpList = [int(i) for i in spList.split()]
-
+    tpList = [int(i) for i in (f.read()).split()]
     sche = scheduler(tpList)
 
     # scheduler calling
