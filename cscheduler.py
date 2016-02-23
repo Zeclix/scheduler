@@ -76,23 +76,16 @@ if __name__ == "__main__":
 
     # file open
     try:
-        f = open('A.txt', 'r')
-    except Exception as e:
-        print(e)
+        with open('A.txt', 'r') as f:
+            # file로부터 List에 담아, string으로 들어온 것을 공백 단위로 쪼개 int로 변환하여 리스트에 넣는다
+            # tpList : temporary process list
+            tpList = [int(i) for i in (f.read()).split()]
+            sche = scheduler(tpList)
 
-    # file로부터 List에 담아, string으로 들어온 것을 공백 단위로 쪼개 int로 변환하여 리스트에 넣는다
-    # tpList : temporary process list
-    tpList = [int(i) for i in (f.read()).split()]
-    sche = scheduler(tpList)
+            # scheduler calling
+            pList = selectScheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, sche)
 
-    # scheduler calling
-    pList = selectScheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, sche)
-
-    for i in range(len(pList) - 1, -1, -1):
-        print("PID : %d\t Waiting Time : %d, Processing Time : %d\n" %(pList[i][0], pList[i][2], pList[i][3]))
-
-    # file close
-    try:
-        f.close()
+            for i in range(len(pList) - 1, -1, -1):
+                print("PID : %d\t Waiting Time : %d, Processing Time : %d\n" %(pList[i][0], pList[i][2], pList[i][3]))
     except Exception as e:
         print(e)
