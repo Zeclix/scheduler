@@ -29,16 +29,16 @@ class scheduler :
         rList = [] # result List
 
         while 1:
-            if flag == 0:
+            if flag == False:
                 process = self.dequeue()
-                flag = 1
+                flag = True
             if (process[1] <= CAT):
                 for i in range(0, len(self.pList)):
                     self.pList[i][2] = self.pList[i][2] + process[1]
                     self.pList[i][3] = self.pList[i][3] + process[1]
                 process[3] = process[3] + process[1]
                 self.enqueue(rList, process[0], process[1], process[2], process[3])
-                flag = 0
+                flag = False
                 if len(pList) == 0:
                     break
             else:
