@@ -82,7 +82,7 @@ if __name__ == "__main__":
             tpList = [int(i) for i in (f.read()).split()]
             sche = scheduler(tpList)
 
-            # scheduler calling
+            # scheduler select and calling
             pList = selectScheduler(int(input("Enter Scheduler # (1: FIFO / 2: SJF / 3: LIFO)")), CAT, sche)
 
             for i in range(len(pList) - 1, -1, -1):
