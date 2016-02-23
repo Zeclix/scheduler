@@ -83,7 +83,7 @@ if __name__=="__main__":
     try:
         f = open('A.txt', 'r')
     except Exception as e:
-        print(str(e))
+        print(e)
         os._exit(1)
 
     # file로부터 List에 담아, string으로 들어온 것을 공백 단위로 쪼개 int로 변환하여 리스트에 넣는다
@@ -101,5 +101,5 @@ if __name__=="__main__":
     try:
         f.close()
     except Exception as e:
-        print(str(e))
+        print(e)
         os._exit(1)
