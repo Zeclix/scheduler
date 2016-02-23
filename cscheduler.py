@@ -30,21 +30,21 @@ class scheduler :
 
         while 1:
             if flag == False:
-                process = self.dequeue()
+                process = self.dequeue() # process : dequeue로 뽑아낸 값 하나. [PID, npTime, wTime, pTime]
                 flag = True
             if (process[1] <= CAT):
-                for i in range(0, len(self.pList)):
-                    self.pList[i][2] = self.pList[i][2] + process[1]
-                    self.pList[i][3] = self.pList[i][3] + process[1]
+                for i in self.pList:
+                    i[2] = i[2] + process[1]
+                    i[3] = i[3] + process[1]
                 process[3] = process[3] + process[1]
                 self.enqueue(rList, process[0], process[1], process[2], process[3])
                 flag = False
-                if len(pList) == 0:
+                if not pList:
                     break
             else:
-                for i in range(0, len(pList)):
-                    self.pList[i][2] = self.pList[i][2] + CAT # 현재 처리되고 있지 않은 다른 process의 waiting time이 allocation time만큼씩 증가
-                    self.pList[i][3] = self.pList[i][3] + CAT # 다른 process의 processing time이 allocation time만큼씩 증가
+                for i in pList:
+                    i[2] = i[2] + CAT # 현재 처리되고 있지 않은 다른 process의 waiting time이 allocation time만큼씩 증가
+                    i[3] = i[3] + CAT # 다른 process의 processing time이 allocation time만큼씩 증가
                 process[1] = process[1] - CAT # 현재 처리되고 있는 프로세스의 남은 처리 요구 시간이 allocation time만큼씩 감소
                 process[3] = process[3] + CAT # 현재 처리되고 있는 프로세스의 processing time이 CAT만큼 증가
         return rList
