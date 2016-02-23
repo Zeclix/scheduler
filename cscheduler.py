@@ -25,7 +25,7 @@ class scheduler :
 
 
     def lifo(self, CAT, pList):
-        flag = 0; # flag가 0일때만 dequeue
+        flag = False; # flag가 0일때만 dequeue
         rList = [] # result List
 
         while 1:
